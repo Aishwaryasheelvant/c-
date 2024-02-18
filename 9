@@ -1,0 +1,83 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class Jmovement : MonoBehaviour
+{
+float speed = 5.0f;
+public Joystick jstick;
+Rigidbody2D playerRB;
+float movement, verticalmove;
+// Start is called before the first frame update
+void Start()
+{
+playerRB = GetComponent<Rigidbody2D>();
+}
+// Update is called once per frame
+void Update()
+{
+movement = jstick.Horizontal * speed;
+
+GetAxis(movement);
+}
+public void GetAxis(float movement)
+{
+//To move player vector2 use 2 parameter one for x and other
+for y
+if (movement > 0.2f)
+{
+playerRB.velocity = new Vector2(movement,
+playerRB.velocity.y);//only we need x axis;
+}
+else if(movement < 0.2f)
+{
+playerRB.velocity = new Vector2(movement,
+playerRB.velocity.y);//only we need x axis;
+}
+}
+}
+
+//
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class DragDrop : MonoBehaviour
+{
+bool isDragging;
+Collider2D objectCollider;
+// Start is called before the first frame update
+void Start()
+{
+objectCollider = GetComponent<Collider2D>();
+isDragging = false;
+}
+// Update is called once per frame
+void Update()
+{
+DragAndDrop();
+}
+void DragAndDrop()
+{
+Vector2 mousePosition =
+Camera.main.ScreenToWorldPoint(Input.mousePosition);
+if (Input.GetMouseButtonDown(0))
+{
+if (objectCollider ==
+Physics2D.OverlapPoint(mousePosition))
+{
+isDragging = true;
+}
+else
+{
+isDragging = false;
+}
+}
+if (isDragging)
+{
+this.transform.position = mousePosition;
+}
+if (Input.GetMouseButtonUp(0))
+{
+isDragging = false;
+}
+}
+}
