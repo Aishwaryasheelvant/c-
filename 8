@@ -1,0 +1,51 @@
+using UnityEngine;
+using TMPro;
+public class Gamemanager : MonoBehaviour
+{
+public TextMeshProUGUI txt;
+int score=0;
+// Start is called before the first frame update
+void Start()
+{
+txt.text=score.ToString();
+}
+public void AddCoin(int val)
+{
+score=score+val;
+Debug.Log(score);
+txt.text=score.ToString();
+}
+}
+
+
+//
+using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+public class Gamemanager : MonoBehaviour
+{//code for score
+public TextMeshProUGUI txt;
+int score=0;
+// Start is called before the first frame update
+void Start()
+{
+txt.text=score.ToString();
+}
+public void AddCoin(int val)
+{
+score=score+val;
+Debug.Log(score);
+txt.text=score.ToString();
+}
+//Code for button
+public void Restart()
+{
+SceneManager.LoadScene(0);
+}
+public void Quit()
+{
+Application.Quit();
+}
+}
+
+
