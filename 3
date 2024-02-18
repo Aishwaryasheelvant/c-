@@ -1,0 +1,51 @@
+using System;
+// Step 1: Define a delegate for the operation
+public delegate void MyDelegate(int a, int b);
+// Step 2: Define a class that performs the operation and raises an event
+class A
+{
+// Define an event of type MathOperationHandler
+public event MyDelegate MyEvent;
+// Method to perform the addition operation
+public void Addition(int a, int b)
+{
+int result = a + b;
+Console.WriteLine($"The result of {a} + {b} is {result}");
+if(MyEvent==null)
+{
+Console.WriteLine("Empty Events");
+}
+// Check if there are any subscribers to the event
+if (MyEvent != null)
+{
+// Invoke the event, passing the result
+MyEvent(a, b);
+}
+}
+}
+// Step 3: Define a class that subscribes to the event
+class B
+{
+// Method that matches the signature of the MathOperationHandler delegate
+public void Multiplication(int a, int b)
+{
+int result = a * b;
+Console.WriteLine($"The result of {a} * {b} : {result}");
+}
+}
+class Program
+{
+static void Main()
+{
+// Create an instance of the math operation class and the result logger
+A a = new A();
+B b = new B();
+// Subscribe the LogResult method to the OperationPerformed event
+a.MyEvent += b.Multiplication;
+a.Addition(5, 3);
+// Perform the addition operation
+a.MyEvent -= b.Multiplication;
+// Perform the addition operation
+a.Addition(5, 5);
+Console.ReadLine();
+}
