@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class PlayerMovement : MonoBehaviour
+{
+// Start is called before the first frame update
+public float moveSpeed=5f;
+Rigidbody2D rb;
+//Animation
+Animator anim;
+//Jump
+public float jumpHeight=8f;
+void Start()
+{
+rb=GetComponent<Rigidbody2D>();
+anim=GetComponent<Animator>();
+}
+// Update is called once per frame
+void Update()
+{
+float horizontalInput = Input.GetAxis("Horizontal");
+MoveLeftRight(horizontalInput);
+SetAnimation(horizontalInput);//calling
+}
+void MoveLeftRight(float x)
+{
+rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
+}
+void SetAnimation(float x)//defination
+{
+if(x>0||x<0)
+{
+anim.SetBool("run",true);
+}
+else
+{
+anim.SetBool("run",false);
+}
+}
+}
